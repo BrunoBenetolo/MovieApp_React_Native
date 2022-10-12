@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView, Platform, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Rotas from './components/Rotas';
+import MovieProvider from './components/contexts/MovieContext';
+import WatchedProvider from './components/contexts/WatchedContext';
 
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={{
+      flex: 1,
+      backgroundColor: '#242A32',
+      paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+    }}>
+      <StatusBar barStyle="light-content" backgroundColor={'#242A32'} />
+      <NavigationContainer>
+        <MovieProvider>
+          <WatchedProvider>
+            <Rotas />
+          </WatchedProvider>
+        </MovieProvider>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
