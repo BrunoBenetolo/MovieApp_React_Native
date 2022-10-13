@@ -3,49 +3,86 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import InfoMovieonCard from '../items/InfoMovieonCard';
 
 
-export default function CardDetail({ item, onPress }) {
-    return (
-        <TouchableOpacity style={styles.componente} onPress={onPress}>
-            <View style={styles.wrpImage}>
-                <ImageBackground
-                    source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
-                    style={styles.imagemFundo}
-                    imageStyle={styles.imagemFundo}
-                />
-            </View>
-            <View style={styles.wrpInfos}>
-                <View style={styles.titleCard}>
-                    <Text style={styles.textTitle}>{item.title}</Text>
-                </View>
-                <View style={styles.infosMovie}>
-                    <InfoMovieonCard
-                        info={item.vote_average}
-                        iconName={'star-outline'}
-                        size={16}
-                        color={'#FF8700'}
-                    />
-                    <InfoMovieonCard
-                        info={item.genres[0].name}
-                        iconName={'ios-film-outline'}
-                        size={16}
-                        color={'#FFf'}
-                    />
-                    <InfoMovieonCard
-                        info={item.release_date}
-                        iconName={'calendar-sharp'}
-                        size={16}
-                        color={'#FFf'}
-                    />
-                    <InfoMovieonCard
-                        info={ `${item.runtime} min`}
-                        iconName={'time-outline'}
-                        size={16}
-                        color={'#FFf'}
+export default function CardDetail({ item, onPress, searchOrWatched }) {
+    
+    if(searchOrWatched !='search'){
+        return (
+            <TouchableOpacity style={styles.componente} onPress={onPress}>
+                <View style={styles.wrpImage}>
+                    <ImageBackground
+                        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+                        style={styles.imagemFundo}
+                        imageStyle={styles.imagemFundo}
                     />
                 </View>
-            </View>
-        </TouchableOpacity>
-    )
+                <View style={styles.wrpInfos}>
+                    <View style={styles.titleCard}>
+                        <Text style={styles.textTitle}>{item.title}</Text>
+                    </View>
+                    <View style={styles.infosMovie}>
+    
+                        <InfoMovieonCard
+                            info={item.vote_average.toFixed(1)}
+                            iconName={'star-outline'}
+                            size={16}
+                            color={'#FF8700'}
+                        />
+                        <InfoMovieonCard
+                            info={item.genres[0].name}
+                            iconName={'ios-film-outline'}
+                            size={16}
+                            color={'#FFf'}
+                        />
+                        <InfoMovieonCard
+                            info={item.release_date}
+                            iconName={'calendar-sharp'}
+                            size={16}
+                            color={'#FFf'}
+                        />
+                        <InfoMovieonCard
+                            info={ `${item.runtime} min`}
+                            iconName={'time-outline'}
+                            size={16}
+                            color={'#FFf'}
+                        />
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    }else{
+        return (
+            <TouchableOpacity style={styles.componente} onPress={onPress}>
+                <View style={styles.wrpImage}>
+                    <ImageBackground
+                        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+                        style={styles.imagemFundo}
+                        imageStyle={styles.imagemFundo}
+                    />
+                </View>
+                <View style={styles.wrpInfos}>
+                    <View style={styles.titleCard}>
+                        <Text style={styles.textTitle}>{item.title}</Text>
+                    </View>
+                    <View style={styles.infosMovie}>
+                        <InfoMovieonCard
+                            info={item.vote_average.toFixed(1)}
+                            iconName={'star-outline'}
+                            size={16}
+                            color={'#FF8700'}
+                        />
+                        <InfoMovieonCard
+                            info={item.release_date}
+                            iconName={'calendar-sharp'}
+                            size={16}
+                            color={'#FFf'}
+                        />
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+    
+    
 }
 
 const styles = StyleSheet.create({

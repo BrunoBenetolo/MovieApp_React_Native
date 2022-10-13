@@ -31,7 +31,7 @@ export default function Pesquisar({ navigation }) {
 
     const renderItem = ({ item }) => {
         return (
-            <CardDetail item={item} onPress={() => getTMDBInfo(item.id)} />
+            <CardDetail searchOrWatched={'search'} item={item} onPress={() => getTMDBInfo(item.id, true)} />
         );
     }
     return (
@@ -51,7 +51,7 @@ export default function Pesquisar({ navigation }) {
                             }}
                         />
                         <Text style={styles.textoSuperior}>Pesquisar</Text>
-                        <IconButton name='filter' onPressButton={() => Alert.alert('infos')} color='#fff' />
+                        <IconButton name='information-circle-outline' onPressButton={() => Alert.alert("Pesquise o seus filmes preferidos!")} color='#fff' />
                     </View>
                     <View style={styles.wrpBarraPesquisa}>
                         <SearchBar

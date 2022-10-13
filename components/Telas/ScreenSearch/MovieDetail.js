@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Alert, KeyboardAvoidingView, Platform, ImageBac
 import InfoMovieonCard from '../../items/InfoMovieonCard';
 import NavegadorDetailsMovie from './NavegadorDetailMovie/NavegadorDetailMovies'
 import IconButton from '../../items/IconButton';
+import Icon from "react-native-vector-icons/Ionicons";
+
 import { MovieContext } from '../../contexts/MovieContext';
 import { WatchedContext } from '../../contexts/WatchedContext';
 import { useNavigation } from '@react-navigation/native';
@@ -13,14 +15,14 @@ export default function MovieDetail({ route }) {
     const [movie, setMovie] = useState({});
     const movieInfos = useContext(MovieContext).movie;
     const navigation = useNavigation();
-    const {verificaAssistido, addAssistido, removerAssistido} = useContext(WatchedContext);
-    
-    
+    const { verificaAssistido, addAssistido, removerAssistido } = useContext(WatchedContext);
+
+
     useEffect(() => {
-        verificaAssistido(movieInfos.id)? setAssistido(true):setAssistido(false)
+        verificaAssistido(movieInfos.id) ? setAssistido(true) : setAssistido(false)
         setMovie(movieInfos);
     }, [movieInfos])
-    
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
@@ -30,11 +32,11 @@ export default function MovieDetail({ route }) {
                     <View style={styles.wrpTextoSuperior}>
                         <IconButton name='chevron-back-outline' onPressButton={() => navigation.navigate('Pesquisar', { screen: 'ResultadoPesquisa' })} color='#fff' />
                         <Text style={styles.textoSuperior}>Detalhes</Text>
-                        <IconButton name={assistido? 'bookmark':'bookmark-outline' } onPressButton={() => {
-                            if(verificaAssistido(id)){
+                        <IconButton name={assistido ? 'bookmark' : 'bookmark-outline'} onPressButton={() => {
+                            if (verificaAssistido(id)) {
                                 setAssistido(false)
                                 removerAssistido(id);
-                            }else{
+                            } else {
                                 setAssistido(true)
                                 addAssistido(id)
                             }
@@ -46,6 +48,10 @@ export default function MovieDetail({ route }) {
 
                     <View style={styles.bannerSuperior}>
                         <ImageBackground style={styles.imagemBanner} resizeMode={'cover'} source={{ uri: movie.capa }} />
+                        <View style={styles.wrpRating}>
+                            <Icon color={'#FF8700'} size={16} name={'star-outline'} />
+                            <Text style={styles.textRating}>{movie.rating.toFixed(1)}</Text>
+                        </View>
                     </View>
                     <View style={styles.headerDescription}>
                         <View style={{ flexDirection: 'row' }}>
@@ -55,8 +61,9 @@ export default function MovieDetail({ route }) {
                                     style={styles.headerCardImage}
                                     imageStyle={styles.headerCardImage}
                                 />
+
                             </View>
-                            <Text style={styles.headerTitle}>{movie.title}- #{id}</Text>
+                            <Text style={styles.headerTitle}>{movie.title}</Text>
                         </View>
                         <View style={styles.infosMovie}>
                             <InfoMovieonCard color={'#67686D'} size={16} iconName='calendar-sharp' info={movie.ano} />
@@ -164,5 +171,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#242A32',
 
     },
+    wrpRating:{
+        position: 'absolute',
+        right:10,
+        bottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#242A32',
+        borderRadius: 25,
+        width: 65,
+        height: 25
+    },
+    textRating:{
+        color: '#ff8700',
+        marginLeft: 10
+    }
 
 });
