@@ -10,10 +10,12 @@ export default function Pesquisar() {
         <Stack.Navigator
             screenOptions={{
                 headerShown: false
-                }
+            }
             }
         >
-            <Stack.Screen name='ResultadoPesquisa' component={ResultadoPesquisa} />
+            <Stack.Screen name='ResultadoPesquisa' component={ResultadoPesquisa}
+                
+            />
             <Stack.Screen name='MovieDetail' component={MovieDetail} />
         </Stack.Navigator>
     )

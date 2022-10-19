@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 export const WatchedContext = createContext([]);
 
 function WatchedProvider({ children }) {
-    let listaAssistidos = [985939];
+    let listaAssistidos = [];
     function verificaAssistido(id) {
         if (listaAssistidos.includes(id)) {
             return true;

@@ -47,7 +47,7 @@ export default function Pesquisar({ navigation }) {
                             color='#fff'
                             onPressButton={() => {
                                 setResultadoPesquisa(null);
-                                navigation.goBack();
+                                navigation.navigate('Assistindo Agora');
                             }}
                         />
                         <Text style={styles.textoSuperior}>Pesquisar</Text>
@@ -62,8 +62,6 @@ export default function Pesquisar({ navigation }) {
                                 if (textoPesquisa != null) {
                                     setExecutarPesquisa(textoPesquisa);
                                     //executar a pesquisa
-                                } else {
-
                                 }
                             }}
                         />

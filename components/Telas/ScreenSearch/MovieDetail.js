@@ -18,6 +18,7 @@ export default function MovieDetail({ route }) {
     const { verificaAssistido, addAssistido, removerAssistido } = useContext(WatchedContext);
 
 
+
     useEffect(() => {
         verificaAssistido(movieInfos.id) ? setAssistido(true) : setAssistido(false)
         setMovie(movieInfos);
@@ -30,7 +31,11 @@ export default function MovieDetail({ route }) {
             <View style={styles.conteudo}>
                 <View style={styles.vistaSuperior}>
                     <View style={styles.wrpTextoSuperior}>
-                        <IconButton name='chevron-back-outline' onPressButton={() => navigation.navigate('Pesquisar', { screen: 'ResultadoPesquisa' })} color='#fff' />
+                        <IconButton name='chevron-back-outline' onPressButton={() => {
+                            navigation.navigate('Pesquisar', { screen: 'ResultadoPesquisa' });
+                            
+                        }
+                        } color='#fff' />
                         <Text style={styles.textoSuperior}>Detalhes</Text>
                         <IconButton name={assistido ? 'bookmark' : 'bookmark-outline'} onPressButton={() => {
                             if (verificaAssistido(id)) {
@@ -50,7 +55,7 @@ export default function MovieDetail({ route }) {
                         <ImageBackground style={styles.imagemBanner} resizeMode={'cover'} source={{ uri: movie.capa }} />
                         <View style={styles.wrpRating}>
                             <Icon color={'#FF8700'} size={16} name={'star-outline'} />
-                            <Text style={styles.textRating}>{movie.rating.toFixed(1)}</Text>
+                            <Text style={styles.textRating}>{movie.rating}</Text>
                         </View>
                     </View>
                     <View style={styles.headerDescription}>
@@ -171,9 +176,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#242A32',
 
     },
-    wrpRating:{
+    wrpRating: {
         position: 'absolute',
-        right:10,
+        right: 10,
         bottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -183,7 +188,7 @@ const styles = StyleSheet.create({
         width: 65,
         height: 25
     },
-    textRating:{
+    textRating: {
         color: '#ff8700',
         marginLeft: 10
     }
